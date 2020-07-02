@@ -22,4 +22,6 @@ return [
     'taglib_begin'  => '{',
     // 标签库标签结束标记
     'taglib_end'    => '}',
+    // 默认过滤方法 用于普通标签输出
+    'default_filter'     => '',
 ];

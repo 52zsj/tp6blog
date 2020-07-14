@@ -4,3 +4,4 @@
 *.log
 .env
 public/nginx.htaccess
+node_modules

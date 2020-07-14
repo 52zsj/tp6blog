@@ -8,14 +8,14 @@
 namespace app\admin\controller;
 
 
-use app\admin\middleware\Check;
 use app\BaseController;
 use app\common\libray\traits\Admin;
 use think\facade\View;
 
+
 class Base extends BaseController
 {
-    protected $middleware = [Check::class];
+    // protected $middleware = [Check::class];
     use Admin;
 
     public function initialize()
@@ -30,8 +30,8 @@ class Base extends BaseController
         $view                       = View::instance();
         View::assign('config', $config);
         $view->config = array_merge($view->config, ['a' => '我也不知道', 'b' => '1']);
+        assign_config('cao','nimabi');
 
-        // assign_config('a', '');
     }
 
 }

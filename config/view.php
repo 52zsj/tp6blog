@@ -24,4 +24,10 @@ return [
     'taglib_end'    => '}',
     // 默认过滤方法 用于普通标签输出
     'default_filter'     => '',
+    'tpl_replace_string' => [
+        '__CSS__' => '/static/backend/css',
+        '__JS__'     => '/static/backend/js',
+        '__BACKEND_COMMON__'=>'/static/backend_common',
+        '__BACKEND_SOURCE__'=>'/static/source'
+    ]
 ];

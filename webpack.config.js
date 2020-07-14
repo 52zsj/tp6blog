@@ -3,12 +3,22 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 module.exports = {
-    context:  path.resolve(__dirname, 'public/static'),
+    context: path.resolve(__dirname, 'public/static'),
     entry: {
-        login: './source/js/login.js'
+        login: './source/js/login.js',
+        index: './source/js/index.js'
     },
     optimization: {
-
+        usedExports: true,
+        // splitChunks: {
+        //     cacheGroups: {
+        //         commons: {
+        //             name: "commons",
+        //             chunks: "initial",
+        //             minChunks: 2
+        //         }
+        //     }
+        // }
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -45,7 +55,7 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit:10240,
+                            limit: 10240,
                             outputPath: '../img/',
                             useRelativePath: true
                         },
@@ -72,5 +82,5 @@ module.exports = {
         path: path.resolve(__dirname, 'public/static/backend/js'),
     },
     mode: 'development',
-    devtool: 'inline-source-map',
+    devtool: 'cheap-module-eval-source-map',//eval
 };

@@ -3,9 +3,9 @@ declare (strict_types=1);
 
 namespace app;
 
+use app\admin\library\Auth;
 use think\App;
 use think\exception\ValidateException;
-use think\facade\View;
 use think\Validate;
 
 /**
@@ -57,23 +57,7 @@ abstract class BaseController
      * @var string
      */
     protected $actionName = 'index';
-    /**
-     * 无需登录的方法,同时也就不需要鉴权了
-     * @var array
-     */
-    protected $noNeedLogin = [];
 
-    /**
-     * 无需鉴权的方法,但需要登录
-     * @var array
-     */
-    protected $noNeedRight = [];
-
-    /**
-     * 视图实例
-     * @var null
-     */
-    protected $view = null;
 
     /**
      * 构造方法
@@ -94,6 +78,7 @@ abstract class BaseController
         $this->appName        = app('http')->getName();
         $this->controllerName = $this->request->controller();
         $this->actionName     = $this->request->action();
+
     }
 
     /**
@@ -132,5 +117,5 @@ abstract class BaseController
 
         return $v->failException(true)->check($data);
     }
-
+    use \liliuwei\think\Jump;
 }

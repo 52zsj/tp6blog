@@ -8,14 +8,21 @@
 namespace app\common\libray\traits;
 
 
+use think\facade\View;
+
 Trait Admin
 {
+    public function index()
+    {
+        return View::fetch();
+    }
+
     /**
      * 添加
      */
     public function add()
     {
-
+        return View::fetch();
     }
 
     /**
@@ -23,7 +30,7 @@ Trait Admin
      */
     public function edit()
     {
-
+        return View::fetch();
     }
 
     /**

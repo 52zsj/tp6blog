@@ -3,3 +3,40 @@
 @import "~ionicons/dist/css/ionicons.min.css";
 @import "~icon-kit/dist/css/iconkit.min.css";
 /*前面四个是每个都有*/
+.form-group.has-success label {
+    color: #18bc9c;
+}
+.form-group.has-success .form-control,
+.form-group.has-success .input-group-addon {
+    border-color: #18bc9c;
+    box-shadow: none;
+}
+.form-group.has-success .help-block {
+    color: #18bc9c;
+}
+
+.form-group.has-warning label {
+    color: #f39c12;
+}
+.form-group.has-warning .form-control,
+.form-group.has-warning .input-group-addon {
+    border-color: #f39c12;
+    box-shadow: none;
+}
+.form-group.has-warning .help-block {
+    color: #f39c12;
+}
+.form-group.has-error label {
+    color: #e74c3c;
+}
+.form-group.has-error .form-control,
+.form-group.has-error .input-group-addon {
+    border-color: #e74c3c;
+    box-shadow: none;
+}
+.form-group.has-error .help-block {
+    color: #e74c3c;
+}
+form.form-horizontal .control-label {
+    font-weight: normal;
+}

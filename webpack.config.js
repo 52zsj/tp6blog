@@ -6,7 +6,8 @@ module.exports = {
     context: path.resolve(__dirname, 'public/static'),
     entry: {
         login: './source/js/login.js',
-        index: './source/js/index.js'
+        index: './source/js/index.js',
+       "auth.admin": './source/js/auth.admin.js'
     },
     optimization: {
         usedExports: true,
@@ -24,6 +25,7 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
+            axios:'axios'
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output

@@ -27,7 +27,6 @@ return [
     'tpl_replace_string' => [
         '__CSS__' => '/static/backend/css',
         '__JS__'     => '/static/backend/js',
-        '__BACKEND_COMMON__'=>'/static/backend_common',
         '__BACKEND_SOURCE__'=>'/static/source'
     ]
 ];

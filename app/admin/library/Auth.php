@@ -25,6 +25,11 @@ class Auth extends \think\wenhainan\Auth
     // protected $id;
     protected $logined = false; //登录状态
 
+    public function __get($name)
+    {
+        return Session::get('admin');
+    }
+
     /**
      * Auth constructor.
      */
@@ -61,7 +66,7 @@ class Auth extends \think\wenhainan\Auth
     public function match($arr = [])
     {
         $request = Request::instance();
-        $arr     = is_array($arr) ? $arr : explode(',', $arr);
+        $arr = is_array($arr) ? $arr : explode(',', $arr);
         if (!$arr) {
             return false;
         }
@@ -98,6 +103,61 @@ class Auth extends \think\wenhainan\Auth
     {
         $uid = is_null($uid) ? $this->id : $uid;
         return parent::getGroups($uid);
+    }
+
+    /**
+     * 检查权限
+     * @param $name string|array  需要验证的规则列表,支持逗号分隔的权限规则或索引数组
+     * @param $uid  int           认证用户的id
+     * @param int $type 认证类型
+     * @param string $mode 执行check的模式
+     * @param string $relation 如果为 'or' 表示满足任一条规则即通过验证;如果为 'and'则表示需满足所有规则才能通过验证
+     * return bool               通过验证返回true;失败返回false
+     */
+    public function check($name, $uid = null, $type = 1, $mode = 'url', $relation = 'or')
+    {
+        $uid = is_null($uid) ? $this->id : $uid;
+        if (!$this->config['auth_on']) {
+            return true;
+        }
+        // 获取用户需要验证的所有有效规则列表
+        $authList = $this->getAuthList($uid, $type);
+        if (is_string($name)) {
+            $name = strtolower($name);
+            if (strpos($name, ',') !== false) {
+                $name = explode(',', $name);
+            } else {
+                $name = [$name];
+            }
+        }
+        $list = []; //保存验证通过的规则名
+        if ('url' == $mode) {
+            $REQUEST = unserialize(strtolower(serialize(Request::param())));
+        }
+        foreach ($authList as $auth) {
+            $query = preg_replace('/^.+\?/U', '', $auth);
+            if ('url' == $mode && $query != $auth) {
+                parse_str($query, $param); //解析规则中的param
+                $intersect = array_intersect_assoc($REQUEST, $param);
+                $auth = preg_replace('/\?.*$/U', '', $auth);
+                if (in_array($auth, $name) && $intersect == $param) {
+                    //如果节点相符且url参数满足
+                    $list[] = $auth;
+                }
+            } else {
+                if (in_array($auth, $name)) {
+                    $list[] = $auth;
+                }
+            }
+        }
+        if ('or' == $relation && !empty($list)) {
+            return true;
+        }
+        $diff = array_diff($name, $list);
+        if ('and' == $relation && empty($diff)) {
+            return true;
+        }
+        return false;
     }
 
     /**

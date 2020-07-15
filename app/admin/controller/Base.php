@@ -50,21 +50,19 @@ class Base extends BaseController
         if (!$this->auth->match($this->noNeedLogin)) {
             //检测是否登录
             if (!$this->auth->isLogin()) {
-                $url      = $this->request->param('callback/s', '');
-                $url      = $url ? $url : $this->request->url();
+                $url = $this->request->param('callback/s', '');
+                $url = $url ? $url : $this->request->url();
                 $loginUrl = url('index_login', ['callback' => $url]);
                 $this->redirect($loginUrl);
             }
+            // 判断是否需要验证权限
         }
-        // 判断是否需要验证权限
         if (!$this->auth->match($this->noNeedRight)) {
             // 判断控制器和方法判断是否有对应权限
             if (!$this->auth->check($this->path)) {
                 $this->error('你没有权限访问', '');
             }
         }
-
-
     }
 
 }

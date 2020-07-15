@@ -13,7 +13,7 @@ use think\facade\View;
 class Index extends Base
 {
     protected $noNeedLogin = ['login'];
-    protected $noNeedRight = ['logout'];
+    protected $noNeedRight = ['login', 'logout'];
 
 
     public function index()
@@ -36,9 +36,8 @@ class Index extends Base
         // exit();
 
         if ($this->request->isPost()) {
-            var_dump($this->request->param());
-            var_dump($this->request->pathinfo());
-            exit();
+            $params = $this->request->param();
+            $this->success('操作成功','',$params);
         }
         return View::fetch();
     }

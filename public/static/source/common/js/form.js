@@ -128,7 +128,15 @@ var Form = {
                 data: form.serialize() + (Object.keys(params).length > 0 ? '&' + $.param(params) : ''),
             }).then(function (response) {
                 $('.form-group', form).removeClass('has-feedback has-success has-error');
-                console.log(response);
+                var data = response.data;
+                if (data && typeof data === 'object') {
+
+                }
+                if (typeof success === 'function') {
+                    if (false === success.call(form, data, ret)) {
+                        return false;
+                    }
+                }
             }).catch(function (error) {
                 console.log(error);
             });
@@ -170,13 +178,12 @@ var Form = {
             //         }
             //     }
             // });
-            return true;
+            // return true;
         },
 
         bindevent: function (form, success, error, submit) {
             form = typeof form === 'object' ? form : $(form);
             var events = Form.events;
-
             events.bindevent(form);
 
             events.validator(form, success, error, submit);

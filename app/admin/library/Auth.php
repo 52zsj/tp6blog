@@ -8,6 +8,7 @@
 namespace app\admin\library;
 
 
+use app\admin\model\Admin;
 use think\facade\Config;
 use think\facade\Db;
 use think\facade\Request;
@@ -66,7 +67,7 @@ class Auth extends \think\wenhainan\Auth
     public function match($arr = [])
     {
         $request = Request::instance();
-        $arr = is_array($arr) ? $arr : explode(',', $arr);
+        $arr     = is_array($arr) ? $arr : explode(',', $arr);
         if (!$arr) {
             return false;
         }
@@ -139,7 +140,7 @@ class Auth extends \think\wenhainan\Auth
             if ('url' == $mode && $query != $auth) {
                 parse_str($query, $param); //解析规则中的param
                 $intersect = array_intersect_assoc($REQUEST, $param);
-                $auth = preg_replace('/\?.*$/U', '', $auth);
+                $auth      = preg_replace('/\?.*$/U', '', $auth);
                 if (in_array($auth, $name) && $intersect == $param) {
                     //如果节点相符且url参数满足
                     $list[] = $auth;
@@ -191,5 +192,12 @@ class Auth extends \think\wenhainan\Auth
         }
         $this->logined = true;
         return true;
+    }
+
+    public function login($userName, $password, $keepLogin)
+    {
+        $adminInfo = Admin::where(['username|mobile|email' => $userName])->find();
+        return $adminInfo;
+        exit();
     }
 }

@@ -1,7 +1,8 @@
 import 'nice-validator/dist/jquery.validator.css'
-import axios from 'axios';
 import 'nice-validator';
 import 'nice-validator/dist/local/zh-CN';
+import Toastr from 'toastr';
+import Aojie from './aojie';
 
 var Form = {
     events: {
@@ -58,12 +59,12 @@ var Form = {
                                 return false;
                             }
                         }
-                        //提示及关闭当前窗口
                         var msg = ret.hasOwnProperty("msg") && ret.msg !== "" ? ret.msg : '操作完成';
-                        parent.Toastr.success(msg);
-                        parent.$(".btn-refresh").trigger("click");
-                        var index = parent.Layer.getFrameIndex(window.name);
-                        parent.Layer.close(index);
+                        Toastr.success(msg);
+                        // parent.Toastr.success(msg);
+                        // parent.$(".btn-refresh").trigger("click");
+                        // var index = parent.Layer.getFrameIndex(window.name);
+                        // parent.Layer.close(index);
                         return false;
                     }, function (data, ret) {
                         that.holdSubmit(false);
@@ -121,64 +122,25 @@ var Form = {
                     }
                 });
             }
-            //调用Ajax请求方法
-            axios({
+            Aojie.api.axios({
                 method: type,
                 url: url,
                 data: form.serialize() + (Object.keys(params).length > 0 ? '&' + $.param(params) : ''),
-            }).then(function (response) {
+            }, function (data, ret) {
                 $('.form-group', form).removeClass('has-feedback has-success has-error');
-                var data = response.data;
-                if (data && typeof data === 'object') {
-
-                }
                 if (typeof success === 'function') {
                     if (false === success.call(form, data, ret)) {
                         return false;
                     }
                 }
-            }).catch(function (error) {
-                console.log(error);
+            }, function (data, ret) {
+                if (typeof error === 'function') {
+                    if (false === error.call(form, data, ret)) {
+                        return false;
+                    }
+                }
             });
-            // Fast.api.ajax({
-            //     type: type,
-            //     url: url,
-            //     data: form.serialize() + (Object.keys(params).length > 0 ? '&' + $.param(params) : ''),
-            //     dataType: 'json',
-            //     complete: function (xhr) {
-            //         var token = xhr.getResponseHeader('__token__');
-            //         if (token) {
-            //             $("input[name='__token__']").val(token);
-            //         }
-            //     }
-            // }, function (data, ret) {
-            //     $('.form-group', form).removeClass('has-feedback has-success has-error');
-            //     if (data && typeof data === 'object') {
-            //         //刷新客户端token
-            //         if (typeof data.token !== 'undefined') {
-            //             $("input[name='__token__']").val(data.token);
-            //         }
-            //         //调用客户端事件
-            //         if (typeof data.callback !== 'undefined' && typeof data.callback === 'function') {
-            //             data.callback.call(form, data);
-            //         }
-            //     }
-            //     if (typeof success === 'function') {
-            //         if (false === success.call(form, data, ret)) {
-            //             return false;
-            //         }
-            //     }
-            // }, function (data, ret) {
-            //     if (data && typeof data === 'object' && typeof data.token !== 'undefined') {
-            //         $("input[name='__token__']").val(data.token);
-            //     }
-            //     if (typeof error === 'function') {
-            //         if (false === error.call(form, data, ret)) {
-            //             return false;
-            //         }
-            //     }
-            // });
-            // return true;
+            return true;
         },
 
         bindevent: function (form, success, error, submit) {

@@ -7,6 +7,14 @@
         .form-group {
             margin-bottom: 2.25em;
         }
+        .captcha {
+            width: 65%;
+        }
+        .captcha-img {
+            width: 30%;
+            height: auto;
+            min-height: 35px;
+        }
     </style>
 </head>
 <body>
@@ -26,21 +34,33 @@
 
                     <form class="form-horizontal" data-toggle="validator" method="POST" role="form">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="user_name" data-rule="required" data-control-label="用户名" placeholder="用户名"
+                            <input type="text" class="form-control" name="user_name" data-rule="required"
+                                   data-control-label="用户名" placeholder="用户名"
                                    value="">
                             <i class="ik ik-user"></i>
                         </div>
                         <div class="form-group">
 
-                            <input type="password" class="form-control" name="password" data-rule="required" data-control-label="密码" placeholder="密码"
+                            <input type="password" class="form-control" name="password" data-rule="required"
+                                   data-control-label="密码" placeholder="密码"
                                    value="">
                             <i class="ik ik-lock"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control captcha" name="captcha" data-rule="required"
+                                   data-control-label="验证码" placeholder="验证码"
+                                   value="">
+                            <i class="ik ik-more-horizontal"></i>
+                            <img src="{:captcha_src()}" class="captcha-img" onclick="this.src='/captcha.html/s/'+Math.random()">
+                        </div>
+                        <div class="form-group">
+
                         </div>
                         <div class="row">
                             <div class="col text-left">
                                 <label class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="item_checkbox"
-                                           name="item_checkbox" value="1">
+                                           name="keep_login" value="1">
                                     <span class="custom-control-label">&nbsp;记住我</span>
                                 </label>
                             </div>

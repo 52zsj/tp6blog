@@ -3,7 +3,6 @@ declare (strict_types=1);
 
 namespace app;
 
-use app\admin\library\Auth;
 use think\App;
 use think\exception\ValidateException;
 use think\Validate;

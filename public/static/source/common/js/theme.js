@@ -1,7 +1,8 @@
 import PerfectScrollbar from 'perfect-scrollbar/dist/perfect-scrollbar';
 import {tooltip} from 'bootstrap/dist/js/bootstrap.min'
-import 'screenfull/dist/screenfull'
+import screenfull from 'screenfull/dist/screenfull'
 import 'popper.js/dist/umd/popper.min'
+
 !function (e, s, i) {
     "use strict";
     i(s).ready(function () {

@@ -15,7 +15,7 @@ use think\facade\View;
 class Index extends Base
 {
     protected $noNeedLogin = ['login'];
-    protected $noNeedRight = ['login', 'logout'];
+    protected $noNeedRight = ['index', 'logout'];
 
 
     public function index()
@@ -49,12 +49,25 @@ class Index extends Base
                 $this->error($validate->getError(), $calback);
             }
             $result = $this->auth->login($useraName, $password, $keepLogin ? 86400 : 0);
+            if ($result === false) {
+                $this->error($this->auth->getError());
+            }
             $this->success('成功了吧', '', $result);
-            dump($result);
-            exit();
-
+        }
+        // 根据客户端的cookie,判断是否可以自动登录
+        if ($this->auth->autologin()) {
+            $this->redirect($calback);
         }
         return View::fetch();
+    }
+
+
+    public function logout()
+    {
+        $this->auth->logout();
+        $url = url('index_login');
+        $this->redirect($url, 200);
+
     }
 
 }

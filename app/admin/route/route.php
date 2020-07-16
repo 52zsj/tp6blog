@@ -16,6 +16,7 @@ Route::group('auth/admin', function () {
 Route::group('index', function () {
     Route::rule('/', 'admin/index/index')->name('index_index');
     Route::rule('login', 'admin/index/login')->name('index_login');
+    Route::rule('logout', 'admin/index/logout')->name('index_logout');
 });
 
 Route::get('captcha/[:s]', '\\think\\captcha\\CaptchaController@index');

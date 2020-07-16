@@ -8,8 +8,9 @@
 namespace app\admin\library;
 
 
-use app\admin\model\Admin;
+use app\common\model\Admin;
 use think\facade\Config;
+use think\facade\Cookie;
 use think\facade\Db;
 use think\facade\Request;
 use think\facade\Session;
@@ -25,21 +26,33 @@ class Auth extends \think\wenhainan\Auth
     protected $requestUri;
     // protected $id;
     protected $logined = false; //登录状态
+    protected $error = null;
 
-    public function __get($name)
-    {
-        return Session::get('admin');
-    }
-
-    /**
-     * Auth constructor.
-     */
     public function __construct()
     {
         //可设置配置项 auth, 此配置项为数组。
         if ($auth = Config::get('auth')) {
             $this->config = array_merge($this->config, $auth);
         }
+    }
+
+    public function __get($name)
+    {
+        return Session::get('admin.' . $name);
+    }
+
+
+    /**
+     * 初始化
+     * @param array $options
+     * @return Auth
+     */
+    public static function instance($options = [])
+    {
+        if (is_null(self::$instance)) {
+            self::$instance = new static($options);
+        }
+        return self::$instance;
     }
 
     /**
@@ -194,10 +207,109 @@ class Auth extends \think\wenhainan\Auth
         return true;
     }
 
-    public function login($userName, $password, $keepLogin)
+    public function login($userName, $password, $keepTime = 0)
     {
-        $adminInfo = Admin::where(['username|mobile|email' => $userName])->find();
-        return $adminInfo;
-        exit();
+        $adminInfo = Admin::where(['user_name|mobile' => $userName])->find();
+        if (!$adminInfo) {
+            $this->setError('用户不存在!');
+            return false;
+        }
+        if (!password_make_or_verify($password, $adminInfo['password'])) {
+            $this->setError('密码错误');
+            return false;
+        }
+
+        if ($adminInfo['status'] !== 1) {
+            $this->setError('用户已被禁用');
+            return false;
+        }
+        $adminInfo->login_time = format_time();
+        $adminInfo->save();
+        Session::set('admin', $adminInfo->toArray());
+        $this->keeplogin($keepTime);
+        return true;
+    }
+
+    /**
+     * 刷新保持登录的Cookie
+     *
+     * @param int $keeptime
+     * @return  boolean
+     */
+    protected function keeplogin($keeptime = 0)
+    {
+        if ($keeptime) {
+            $expiretime = time() + $keeptime;
+            $key        = md5(md5($this->id) . md5($keeptime) . md5($expiretime));
+            $data       = [$this->id, $keeptime, $expiretime, $key];
+            Cookie::set('keeplogin', implode('|', $data), 86400 * 30);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 自动登录
+     * @return boolean
+     */
+    public function autologin()
+    {
+        $keeplogin = Cookie::get('keeplogin');
+        if (!$keeplogin) {
+            return false;
+        }
+        list($id, $keeptime, $expiretime, $key) = explode('|', $keeplogin);
+        if ($id && $keeptime && $expiretime && $key && $expiretime > time()) {
+            $admin = Admin::find($id);
+            if (!$admin) {
+                return false;
+            }
+            //token有变更
+            if ($key != md5(md5($id) . md5($keeptime) . md5($expiretime))) {
+                return false;
+            }
+            Session::set("admin", $admin->toArray());
+            //刷新自动登录的时效
+            $this->keeplogin($keeptime);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 注销登录
+     */
+    public function logout()
+    {
+        $admin = Admin::find(intval($this->id));
+        if ($admin) {
+            $admin->token = '';
+            $admin->save();
+        }
+        Session::delete("admin");
+        Cookie::delete("keeplogin");
+        return true;
+    }
+
+    /**
+     * 设置错误信息
+     *
+     * @param string $error 错误信息
+     * @return Auth
+     */
+    public function setError($error)
+    {
+        $this->error = $error;
+        return $this;
+    }
+
+    /**
+     * 获取错误信息
+     * @return string
+     */
+    public function getError()
+    {
+        return $this->error;
     }
 }

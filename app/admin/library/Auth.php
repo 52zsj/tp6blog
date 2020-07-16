@@ -189,20 +189,20 @@ class Auth extends \think\wenhainan\Auth
             return false;
         }
         //判断是否同一时间同一账号只能在一个地方登录
-        if (Config::get('fastadmin.login_unique')) {
-            $my = Admin::get($admin['id']);
-            if (!$my || $my['token'] != $admin['token']) {
-                $this->logout();
-                return false;
-            }
-        }
-        //判断管理员IP是否变动
-        if (Config::get('fastadmin.loginip_check')) {
-            if (!isset($admin['loginip']) || $admin['loginip'] != request()->ip()) {
-                $this->logout();
-                return false;
-            }
-        }
+//        if (Config::get('fastadmin.login_unique')) {
+//            $my = Admin::get($admin['id']);
+//            if (!$my || $my['token'] != $admin['token']) {
+//                $this->logout();
+//                return false;
+//            }
+//        }
+//        //判断管理员IP是否变动
+//        if (Config::get('fastadmin.loginip_check')) {
+//            if (!isset($admin['loginip']) || $admin['loginip'] != request()->ip()) {
+//                $this->logout();
+//                return false;
+//            }
+//        }
         $this->logined = true;
         return true;
     }

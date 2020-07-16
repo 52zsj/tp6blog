@@ -26,8 +26,11 @@ class Index extends Base
 
     public function login()
     {
-        $defaultCalback = url('index_login');
+        $defaultCalback = url('index_index');
         $calback        = $this->request->get('callback', $defaultCalback);
+        if($this->auth->isLogin()){
+            $this->redirect($calback);
+        }
         if ($this->request->isPost()) {
             $useraName = $this->request->param('user_name', '');
             $password  = $this->request->param('password', '');
@@ -52,7 +55,7 @@ class Index extends Base
             if ($result === false) {
                 $this->error($this->auth->getError());
             }
-            $this->success('成功了吧', '', $result);
+            $this->success('登陆成功', $calback, $result);
         }
         // 根据客户端的cookie,判断是否可以自动登录
         if ($this->auth->autologin()) {

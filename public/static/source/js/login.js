@@ -1,9 +1,7 @@
 import '../css/backend.css'
-import '../css/theme.css'
-import 'perfect-scrollbar/css/perfect-scrollbar.css'
+import '../css/login.css'
 
-
-import Form from '../common/js/form'
+import Form from '../plugins/aojie/form'
 
 var form = $('form[role="form"]');
 Form.api.bindevent(form, function (data, ret) {

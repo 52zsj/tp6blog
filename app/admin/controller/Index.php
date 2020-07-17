@@ -70,7 +70,6 @@ class Index extends Base
         $this->auth->logout();
         $url = url('index_login');
         $this->redirect($url, 200);
-
     }
 
 }

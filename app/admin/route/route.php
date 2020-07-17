@@ -2,22 +2,31 @@
 
 use think\facade\Route;
 
-Route::group('auth/test', function () {
-    Route::rule('/', 'admin/auth.test/index')->name('auth_test_index');
-    Route::rule('add', 'admin/auth.test/add')->name('auth_test_add');
-    Route::rule('edit', 'admin/auth.test/edit')->name('auth_test_edit');
-});
-Route::group('auth/admin', function () {
-    Route::rule('/', 'admin/auth.admin/index')->name('auth_admin_index');
-    Route::rule('add', 'admin/auth.admin/add')->name('auth_admin_add');
-    Route::rule('edit', 'admin/auth.admin/edit')->name('auth_admin_edit');
-});
 
+//首页
 Route::group('index', function () {
-    Route::rule('/', 'admin/index/index')->name('index_index');
-    Route::rule('login', 'admin/index/login')->name('index_login');
-    Route::rule('logout', 'admin/index/logout')->name('index_logout');
-});
+    Route::rule('index', 'index')->name('index_index');
+    Route::rule('login', 'login')->name('index_login');
+    Route::rule('profile', 'profile')->name('index_profile');
+    Route::rule('logout', 'logout')->name('index_logout');
+})->prefix('admin/index/');
+
+Route::group('auth/rule', function () {
+    Route::rule('index', 'index')->name('auth_rule_index');
+    Route::rule('add', 'add')->name('auth_rule_add');
+    Route::rule('edit', 'edit')->name('auth_rule_edit');
+    Route::rule('del', 'del')->name('auth_rule_del');
+})->prefix('admin/auth.rule/');
+
+//管理员
+Route::group('auth/admin', function () {
+    Route::rule('index', 'index')->name('auth_admin_index');
+    Route::rule('add', 'add')->name('auth_admin_add');
+    Route::rule('edit', 'edit')->name('auth_admin_edit');
+})->prefix('admin/auth.admin/');
+
+
+
 
 Route::get('captcha/[:s]', '\\think\\captcha\\CaptchaController@index');
 

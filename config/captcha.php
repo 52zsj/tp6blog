@@ -23,7 +23,7 @@ return [
     //是否添加杂点
     'useNoise' => false,
     // 验证码字体 不设置则随机
-    'fontttf'  => '4.ttf',
+    'fontttf'  => '2.ttf',
     //背景颜色
     'bg'       => [255, 255, 255],
     // 验证码图片高度

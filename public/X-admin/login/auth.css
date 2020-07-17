@@ -1,0 +1,414 @@
+body {
+    box-sizing: border-box;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../img/auth-bg.svg") no-repeat center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.logo {
+    position: absolute;
+    margin-top: -320px;
+    width: 270px;
+    font-weight: bold;
+}
+
+.auth {
+    width: 800px;
+    height: 470px;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    position: absolute;
+}
+
+.left-img {
+    border-right: 1px solid #f8f8f8;
+    width: 370px;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.left-img img {
+    image-rendering: pixelated;
+}
+
+
+.right-main {
+    width: 100%;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.auth-main {
+    position: relative;
+    padding: 0;
+}
+
+.right-main .layui-tab {
+    margin: 0;
+}
+
+.right-main .auth-title {
+    border-bottom: 1px #f1f1f1 solid;
+    line-height: 40px;
+    padding-bottom: 10px;
+}
+
+.right-main .auth-title li {
+    width: 50%;
+    padding: 0;
+}
+
+.right-main .auth-title .layui-this:after {
+    height: 51px;
+}
+
+.right-main .auth-title span {
+    font-size: 16px;
+    color: #282828;
+    font-weight: 500;
+}
+
+.right-main .auth-title i {
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    float: right;
+    font-size: 50px;
+    overflow: hidden;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.right-main form {
+    padding: 30px 0px 0px;
+}
+
+.right-main .layui-form-item {
+    position: relative;
+}
+
+.right-main .layui-form .layui-input-block {
+    position: relative;
+    padding: 5px 0;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 0 auto 25px;
+    line-height: 14px;
+    border: 1px #f1f1f1 solid;
+    display: block;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.right-main .layui-form .layui-input {
+    border: none;
+    border-radius: 0;
+    outline: none;
+    height: 40px;
+    font-size: 14px;
+    padding-left: 10px;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    z-index: 1000;
+    background-color: transparent;
+}
+
+.right-main .input-item--active .layui-input-block {
+    border: 1px solid #77a9fd35;
+}
+
+.right-main .input-item--active .layui-input-block::after, .right-main .input-item--error .layui-input-block::after {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+}
+
+.right-main .layui-form .layui-form-label {
+    position: absolute;
+    display: inline-block;
+    color: #aaa;
+    padding: 0 8px;
+    width: auto;
+    font-size: 12px;
+    top: 10px;
+    left: 10px;
+    transition: top 0.2s ease;
+    cursor: text;
+    background-color: #ffffff;
+    z-index: 1000;
+}
+
+.right-main .input-item--active .layui-form-label, .right-main .input-item--filled .layui-form-label {
+    top: -12px;
+}
+
+
+.captcha {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    border-radius: 2px;
+    z-index: 1000;
+}
+
+.right-main .login-link {
+    min-height: 20px;
+}
+
+.right-main .login-link div:nth-child(2) {
+    text-align: right;
+}
+
+.right-main .login-link a {
+    font-size: 12px;
+    color: #8d8d8d;
+    display: block;
+    line-height: 1.35;
+}
+
+.right-main .layui-form-item .layui-form-checkbox[lay-skin=primary], .right-main .layui-form-checkbox[lay-skin=primary] * {
+    margin-top: 0;
+    font-size: 12px !important;
+    vertical-align: unset;
+    float: left;
+    padding-right: 0;
+}
+
+.right-main .layui-form-item .layui-form-checkbox[lay-skin=primary] span {
+    color: #8d8d8d;
+    font-size: 12px !important;
+    line-height: 16px;
+}
+
+.right-main .layui-form-item .layui-form-checkbox[lay-skin=primary] span a {
+    line-height: 1;
+    color: #1E9FFF;
+}
+
+.right-main .layui-form-checkbox[lay-skin=primary] i {
+    width: 14px;
+    height: 14px;
+}
+
+.right-main .input-left {
+    width: 210px;
+    position: static !important;
+    margin-left: 0 !important;
+}
+
+#login_container {
+    position: absolute;
+    top: 0;
+    z-index: 100000;
+    background-color: #ffffff;
+    width: 100%;
+    max-height: 380px;
+    text-align: center;
+}
+
+.login-btn-icon {
+    text-align: center;
+    width: 100%;
+    margin: 29px auto 0;
+}
+
+.login-btn-icon ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.login-btn-icon li {
+    float: left;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.login-btn-icon li a {
+    display: block;
+}
+
+.login-btn-icon i {
+    font-size: 18px;
+    line-height: 38px;
+    color: #ffffff;
+}
+
+.get-mobile-code, .getMobileCode {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 140px;
+    height: 40px;
+    z-index: 1000;
+}
+
+.login-copyright {
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    color: rgba(0, 0, 0, .4);
+    margin-bottom: -560px;
+}
+
+.login-copyright a {
+    color: rgba(0, 0, 0, .4);
+}
+
+.userInfo .layui-input-block {
+    margin-left: 60px !important;
+}
+
+.userInfo img {
+    float: left;
+    width: 40px;
+    position: absolute;
+    top: 0;
+}
+
+.layui-btn-disabled, .layui-btn-disabled:active, .layui-btn-disabled:hover {
+    border: 1px #f1f1f1 solid !important;
+    background-color: #FBFBFB !important;
+    color: #C9C9C9 !important;
+    cursor: not-allowed;
+    opacity: 1;
+    pointer-events: none;
+}
+
+.verification {
+    padding: 30px 40px;
+    font-family: 华文黑体, "Microsoft YaHei", 微软雅黑, STHei, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.verification .title {
+    text-align: center;
+    font-size: 21px;
+    color: #444;
+    height: 40px;
+    margin-bottom: 15px;
+    overflow: hidden
+}
+
+.verification .tips {
+    color: #777;
+    font-size: 13px;
+    margin-top: 18px
+}
+
+.verification input {
+    width: 100%;
+    height: 40px;
+    line-height: 30px;
+    border: 1px #f1f1f1 solid;
+    padding: 4px 10px;
+    z-index: 1;
+    border-radius: 2px;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input[type="password"] {
+    padding-left: 15px !important;
+}
+
+.step {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto 50px;
+    width: 100%;
+}
+
+.step li {
+    text-align: center;
+    color: #666666;
+    position: relative;
+}
+
+.step li span {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    background-color: #efefef;
+}
+
+.step li p {
+    line-height: 3.4;
+}
+
+.step li i {
+    float: left;
+    width: 85px;
+    height: 2px;
+    left: 65px;
+    vertical-align: middle;
+    background-color: #ededed;
+    position: absolute;
+    top: 25%;
+}
+
+.step li.active span {
+    background-color: #5291fc;
+    color: #ffffff;
+}
+
+.step li.active i {
+    background: linear-gradient(to right, #5291fc, #ededed);
+}
+
+
+.auth-main .step-1, .auth-main .step-2, .auth-main .step-3, .auth-main .step-4 {
+    width: 365px;
+    margin: auto;
+}
+
+.auth-main .step-item {
+    display: none;
+}
+
+.auth-main .step-1 {
+    display: block;
+}
+
+.auth-main .layui-input.mobile{
+    line-height: 40px;
+}
+
+.auth-main .forget-ok {
+    text-align: center;
+}
+
+.auth-main .forget-ok i {
+    font-size: 100px;
+    line-height: 1;
+}
+
+.auth-main .forget-ok p {
+    padding: 50px 0 0;
+    font-size: 18px;
+}

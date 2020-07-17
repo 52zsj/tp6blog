@@ -50,6 +50,7 @@ class Base extends BaseController
         // 设置当前请求的URI
         $this->auth->setRequestUri($this->path);
         // 检测是否需要验证登录
+
         if (!$this->auth->match($this->noNeedLogin)) {
             //检测是否登录
             if (!$this->auth->isLogin()) {
@@ -58,11 +59,12 @@ class Base extends BaseController
                 $loginUrl = url('index_login', ['callback' => $url]);
                 $this->redirect($loginUrl);
             }
+
             // 判断是否需要验证权限
             if (!$this->auth->match($this->noNeedRight)) {
                 // 判断控制器和方法判断是否有对应权限
                 if (!$this->auth->check($this->path)) {
-                    $this->error('你没有权限访问', '');
+                    $this->error('你没有权限访问');
                 }
             }
         }

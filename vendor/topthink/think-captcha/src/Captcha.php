@@ -13,6 +13,7 @@ namespace think\captcha;
 
 use Exception;
 use think\Config;
+use think\facade\Log;
 use think\Response;
 use think\Session;
 
@@ -102,10 +103,9 @@ class Captcha
 
         if ($this->math) {
             $this->useZh  = false;
-            $this->length = 5;
-
             $x   = random_int(10, 30);
             $y   = random_int(1, 9);
+            $this->length = 2 + strlen($x) + strlen($y);
             $bag = " = {$x} + {$y} ";
             $key = $x + $y;
             $key .= '';
@@ -216,14 +216,12 @@ class Captcha
 
         // 绘验证码
         $text = $this->useZh ? preg_split('/(?<!^)(?!$)/u', $generator['value']) : str_split($generator['value']); // 验证码
-
         foreach ($text as $index => $char) {
             $x     = $this->fontSize * ($index + 1) * mt_rand(1.2, 1.6) * ($this->math ? 1 : 1.5);
-            $y     = $this->fontSize + ($this->math ? ($this->fontSize*1.5 ): mt_rand(10, 20));
+            $y     = chat_center($this->fontSize,$fontttf,$char,$this->imageH,2);
             $angle = $this->math ? 0 : mt_rand(-40, 40);
-            imagettftext($this->im, $this->fontSize, $angle, $x, $y, $this->color, $fontttf, $char);
+            imagettftext($this->im, 20, $angle, $x, $y, $this->color, $fontttf, $char);
         }
-
         ob_start();
         // 输出图像
         imagepng($this->im);

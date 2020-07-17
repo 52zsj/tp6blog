@@ -26,7 +26,7 @@
         "topthink/think-multi-app": "^1.0",
         "topthink/think-view": "^1.0",
         "liliuwei/thinkphp-jump": "^1.5",
-        "topthink/think-captcha": "3.0",
+        "topthink/think-captcha": "=3.0",
         "topthink/think-helper": "^3.1"
     },
     "require-dev": {

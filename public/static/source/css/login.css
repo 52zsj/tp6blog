@@ -52,7 +52,7 @@
 .login input[type=text],
 .login input[type=file],
 .login input[type=password],
-.login input[type=email], select {
+.login input[type=email], select{
     border: 1px solid #DCDEE0;
     vertical-align: middle;
     border-radius: 3px;
@@ -112,8 +112,14 @@
     padding: 0px;
     width: 100%;
 }
+#captcha {
+    width: 50%;
+    display: inline-block;
+}
 
-.captcha-img {
-    width: 45%;
-    height: 100%;
+#captcha-img {
+    vertical-align: middle;
+    border-radius: 3px;
+    height: 50px;
+    width: 48%;
 }

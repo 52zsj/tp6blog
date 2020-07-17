@@ -1,10 +1,6 @@
 import '../css/backend.css'
-import '../css/theme.css'
-import 'perfect-scrollbar/css/perfect-scrollbar.css'
-import '../common/js/theme'
-import 'bootstrap-table/dist/bootstrap-table.min.css'
 import Moment from 'moment'
-import 'bootstrap-table'
+
 
 var Controller = {
     index: function () {

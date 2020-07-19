@@ -3,6 +3,7 @@ import 'nice-validator';
 import 'nice-validator/dist/local/zh-CN';
 import Toastr from 'toastr';
 import Aojie from './aojie';
+import "./common";
 
 var Form = {
     events: {
@@ -13,14 +14,14 @@ var Form = {
             form.validator($.extend({
                 validClass: 'has-success',
                 invalidClass: 'has-error',
-                bindClassTo: '.form-group',
+                bindClassTo: '.layui-form-item',
                 formClass: 'n-default n-bootstrap',
                 msgClass: 'n-bottom',
                 stopOnError: true,
                 display: function (elem) {
-                    var text = $(elem).closest('.form-group').find(".control-label").text().replace(/\:\：/, '');
+                    var text = $(elem).closest('.layui-form-item').find(".layui-form-label").text().replace(/\:\：/, '');
                     if (text == '') {
-                        var text = $(elem).attr('data-control-label');
+                        var text = $(elem).attr('data-form-label');
                     }
                     return text;
                 },
@@ -36,7 +37,7 @@ var Form = {
                     if (target && $(target).size() > 0) {
                         return $(target);
                     }
-                    var $formitem = $(input).closest('.form-group'),
+                    var $formitem = $(input).closest('.layui-form-item'),
                         $msgbox = $formitem.find('span.msg-box');
                     if (!$msgbox.length) {
                         return [];
@@ -91,7 +92,6 @@ var Form = {
             $(".footer-button [type=submit]", form).removeClass("disabled");
         },
         bindevent: function (form) {
-
         },
     },
     api: {
@@ -127,7 +127,7 @@ var Form = {
                 url: url,
                 data: form.serialize() + (Object.keys(params).length > 0 ? '&' + $.param(params) : ''),
             }, function (data, ret) {
-                $('.form-group', form).removeClass('has-feedback has-success has-error');
+                $('.layui-form-item', form).removeClass('has-feedback has-success has-error');
                 if (typeof success === 'function') {
                     if (false === success.call(form, data, ret)) {
                         return false;
@@ -172,6 +172,7 @@ var Form = {
 
               events.switcher(form);*/
         },
+
     }
 
 

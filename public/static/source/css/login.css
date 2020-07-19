@@ -6,7 +6,7 @@
 */
 .login-bg {
     /*background: #eeeeee url() 0 0 no-repeat;*/
-    background: url(../images/bg.png) no-repeat center;
+    background: url(../images/bg.jpg) no-repeat center;
     background-size: cover;
     overflow: hidden;
 }
@@ -52,7 +52,7 @@
 .login input[type=text],
 .login input[type=file],
 .login input[type=password],
-.login input[type=email], select{
+.login input[type=email], select {
     border: 1px solid #DCDEE0;
     vertical-align: middle;
     border-radius: 3px;
@@ -63,13 +63,6 @@
     outline: none;
     width: 100%;
     box-sizing: border-box;
-}
-
-.login input[type=text]:focus,
-.login input[type=file]:focus,
-.login input[type=password]:focus,
-.login input[type=email]:focus, select:focus {
-    border: 1px solid #27A9E3;
 }
 
 .login input[type=submit],
@@ -112,6 +105,15 @@
     padding: 0px;
     width: 100%;
 }
+
+.login hr.hr30 {
+    height: 30px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
 #captcha {
     width: 50%;
     display: inline-block;

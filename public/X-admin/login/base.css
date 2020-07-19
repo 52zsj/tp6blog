@@ -123,10 +123,6 @@
     border-radius: 0;
 }
 
-.form .layui-input:focus, .form .layui-input:hover, .form .layui-select:focus, .form .layui-select:hover, .form .layui-textarea:focus, .form .layui-textarea:hover {
-    border-color: #e6e6e6 !important;
-}
-
 .form .layui-form-item .layui-input-inline {
     margin-right: 0;
 }

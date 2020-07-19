@@ -9,49 +9,36 @@
     <div class="message">傲杰后台管理系统</div>
     <div id="darkbannerwrap"></div>
     <form class="layui-form form-horizontal" data-toggle="validator" method="POST" role="form">
-        <input name="username" placeholder="用户名"  data-control-label="用户名" type="text" data-rule="required" class="layui-input">
+        <div class="layui-form-item">
+            <input name="user_name" placeholder="用户名" data-form-label="用户名" type="text" data-rule="required" class="layui-input">
+        </div>
         <hr class="hr15">
+        <div class="layui-form-item">
+            <input name="password" placeholder="密码" data-form-label="密码" data-rule="required" type="password" class="layui-input">
+        </div>
         <hr class="hr15">
-        <input name="password" placeholder="密码" data-control-label="密码"  data-rule="required" type="password" class="layui-input">
+        <div class="layui-form-item">
+            <input name="captcha" placeholder="验证码" data-form-label="验证码" data-rule="required" type="text" class="layui-input" id="captcha">
+            <img src="{:captcha_src()}" class="captcha-img" id="captcha-img" onclick="this.src='/captcha.html/s/'+Math.random()">
+        </div>
         <hr class="hr15">
+        <div class="layui-form-item">
+            <input type="checkbox" name="keep_login" title="记住我，下次直接登录" value="1" lay-skin="primary">
+        </div>
         <hr class="hr15">
-        <input name="captcha" placeholder="验证码" data-control-label="验证码"  data-rule="required" type="text" class="layui-input" id="captcha">
-        <img src="{:captcha_src()}" class="captcha-img" id="captcha-img" onclick="this.src='/captcha.html/s/'+Math.random()">
+        <input value="登录" style="width:100%;" type="submit">
         <hr class="hr15">
-        <hr class="hr15">
-        <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
-        <hr class="hr20">
     </form>
 </div>
 <script src="__JS__/login.bundle.js"></script>
-<!--<script>
-    $(function () {
-        layui.use('form', function () {
-            var form = layui.form;
-            // layer.msg('玩命卖萌中', function(){
-            //   //关闭后的操作
-            //   });
-            //监听提交
-            form.on('submit(login)', function (data) {
-                // alert(888)
-                layer.msg(JSON.stringify(data.field), function () {
-                    location.href = 'index.html'
-                });
-                return false;
-            });
-        });
-    })
-</script>
-&lt;!&ndash; 底部结束 &ndash;&gt;
 <script>
-    //百度统计可去掉
     var _hmt = _hmt || [];
-    (function () {
+    (function() {
         var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        hm.src = "https://hm.baidu.com/hm.js?e5978f354aedf1b283dcecd75c9f8a4b";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-</script>-->
+</script>
 </body>
 </html>

@@ -14,6 +14,25 @@ Trait Admin
 {
     public function index()
     {
+        //设置过滤方法
+        $this->request->filter(['strip_tags']);
+        if ($this->request->isAjax()) {
+            $page  = $this->request->param('page', 1);
+            $limit = $this->request->param('limit', 10);
+
+            $count         = $this
+                ->model
+                ->count();
+            $row           = $this
+                ->model
+                ->page($page, $limit)
+                ->select();
+            $data['code']  = 0;
+            $data['msg']   = '';
+            $data['count'] = $count;
+            $data['data']  = $row;
+            return json($data);
+        }
         return View::fetch();
     }
 

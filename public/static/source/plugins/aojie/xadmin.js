@@ -1,6 +1,4 @@
 import '../layui/layui';
-import './form';
-
 layui.config({
     dir: '/static/source/plugins/layui/'
 });

@@ -1,0 +1,32 @@
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="tool-bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" id="aojie-add" lay-event="add">添加</button>
+        <!--  <button class="layui-btn layui-btn-sm layui-btn-disabled" id="aojie-edit" disabled lay-event="edit">编辑</button>-->
+        <button class="layui-btn layui-btn-sm layui-btn-danger layui-btn-disabled " id="aojie-del" disabled
+                lay-event="del">删除
+        </button>
+    </div>
+</script>
+<script type="text/html" id="status">
+    {{#  if(d.status ==1){ }}
+    <span style="color: #009688;">已启用/显示</span>
+    {{#  } else if(d.status==0){ }}
+    <span style="color: #b13518;">已禁用/不显示</span>
+    {{#  }else{ }}
+    <span style="color: #ff00fa;">未知状态：{{d.status}}</span>
+    {{# } }}
+</script>
+<script type="text/html" id="image">
+    <div style="width: 100px;">
+        <img src="\{{ d.cover}}" title="点击放大查看" alt="图片不见了T.T" class="to-big" width="100px;">
+    </div>
+</script>
+
+<script type="text/html" id="icon">
+    <i class="{{ d.icon}}"></i>
+</script>

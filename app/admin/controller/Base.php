@@ -11,6 +11,8 @@ namespace app\admin\controller;
 use app\admin\library\Auth;
 use app\BaseController;
 use app\common\libray\traits\Admin;
+use app\common\libray\Tree;
+use app\common\model\AuthRule;
 use think\facade\Session;
 use think\facade\View;
 
@@ -35,6 +37,8 @@ class Base extends BaseController
      * @var null
      */
     protected $auth = null;
+
+    protected $model =null;
 
     use Admin;
 
@@ -68,12 +72,28 @@ class Base extends BaseController
                 }
             }
         }
+        //获取所有权限菜单
+        $menuList = AuthRule::where('status', '=', '1')->where('is_menu', 1)->select()->toArray();
+        foreach ($menuList as $k => &$v) {
+            $v['url']       = '/' . $v['name'];
+            $v['route_url'] = (string)url($v['route_name']);
+        }
+        Tree::instance()->init($menuList);
+        $tpl  = '<li><a href="javascript:;" onclick="xadmin.add_tab(\'@title\',\'@url\')"><i class="@icon" lay-tips="@title"></i><cite>@title</cite></i></a>@childlist</li>';
+        $menu = Tree::instance()->getTreeUl(0, $tpl, '', '', 'ul', 'class="sub-menu"');
+
+
         //统一渲染
         $config = ['action' => $this->actionName];
         $option = [
-            'auth'   => $this->auth,
-            'admin'  => Session::get('admin'),
-            'config' => $config,
+            'auth'       => $this->auth,
+            'admin'      => Session::get('admin'),
+            'config'     => $config,
+            'menu'       => $menu,
+            'controller' => $this->controllerName,
+            'action'     => $this->actionName,
+            'app'        => $this->appName,
+            'path'        => $this->path,
         ];
         View::assign($option);
     }

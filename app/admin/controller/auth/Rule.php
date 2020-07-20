@@ -9,6 +9,7 @@ namespace app\admin\controller\auth;
 
 
 use app\admin\controller\Base;
+use app\common\model\AuthRule;
 use think\App;
 use think\facade\Db;
 use think\facade\View;
@@ -16,18 +17,13 @@ use think\facade\View;
 
 class Rule extends Base
 {
+    public function __construct(App $app)
+    {
+        parent::__construct($app);
+        $this->model = new AuthRule();
+    }
+
     protected $noNeedLogin = [];
     protected $noNeedRight = [];
 
-
-    public function index()
-    {
-        if ($this->request->isAjax()) {
-            $total  = Db::name('auth_rule')->count();
-            $list   = Db::name('auth_rule')->select();
-            $result = array("total" => $total, "rows" => $list);
-            return json($result);
-        }
-        return View::fetch();
-    }
 }

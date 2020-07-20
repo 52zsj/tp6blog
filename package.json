@@ -24,7 +24,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "moment": "^2.27.0",
     "nice-validator": "^1.1.5",
     "toastr": "^2.1.4",

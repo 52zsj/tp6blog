@@ -1,152 +1,259 @@
-<div class="app-sidebar colored">
-        <div class="sidebar-header">
-            <a class="header-brand" href="index.html">
-                <div class="logo-img">
-                    <img src="__BACKEND_SOURCE__/img/favicon.svg" class="header-brand-img" alt="lavalite">
-                </div>
-                <span class="text">傲杰笔记</span>
-            </a>
-            <button type="button" class="nav-toggle">
-                <i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i>
-            </button>
-            <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>
-        </div>
-        <div class="sidebar-content">
-            <div class="nav-container">
-                <nav id="main-menu-navigation" class="navigation-main">
-                    <div class="nav-lavel">导航</div>
-                    <div class="nav-item">
-                        <a href="{:url('index_index')}"><i class="ik ik-bar-chart-2"></i><span>仪表盘</span></a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="{:url('auth_rule_index')}"><i class="ik ik-menu"></i><span>权限列表</span>
-                            <span class="badge badge-success">新的</span></a>
-                    </div>
-                    <div class="nav-item has-sub">
-                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>小部件</span>
-                            <span class="badge badge-danger">150+</span></a>
-                        <div class="submenu-content">
-                            <a href="pages/widgets.html" class="menu-item">基本的</a>
-                            <a href="pages/widget-statistic.html" class="menu-item">统计</a>
-                            <a href="pages/widget-data.html" class="menu-item">数据</a>
-                            <a href="pages/widget-chart.html" class="menu-item">图表部件</a>
-                        </div>
-                    </div>
-                    <div class="nav-lavel">UI元素</div>
-                    <div class="nav-item has-sub">
-                        <a href="#"><i class="ik ik-box"></i><span>基本的</span></a>
-                        <div class="submenu-content">
-                            <a href="pages/ui/alerts.html" class="menu-item">弹出</a>
-                            <a href="pages/ui/badges.html" class="menu-item">徽章</a>
-                            <a href="pages/ui/buttons.html" class="menu-item">按钮</a>
-                            <a href="pages/ui/navigation.html" class="menu-item">导航</a>
-                        </div>
-                    </div>
-                    <div class="nav-item has-sub">
-                        <a href="#"><i class="ik ik-gitlab"></i><span>啥呀</span>
-                            <span class="badge badge-success">New</span></a>
-                        <div class="submenu-content">
-                            <a href="pages/ui/modals.html" class="menu-item">模态框</a>
-                            <a href="pages/ui/notifications.html" class="menu-item">通知</a>
-                            <a href="pages/ui/carousel.html" class="menu-item">滑动条</a>
-                            <a href="pages/ui/range-slider.html" class="menu-item">方位滑块</a>
-                            <a href="pages/ui/rating.html" class="menu-item">评分</a>
-                        </div>
-                    </div>
-                    <div class="nav-item has-sub">
-                        <a href="#"><i class="ik ik-package"></i><span>Extra</span></a>
-                        <div class="submenu-content">
-                            <a href="pages/ui/session-timeout.html" class="menu-item">Session Timeout</a>
-                        </div>
-                    </div>
-                    <div class="nav-item">
-                        <a href="pages/ui/icons.html"><i class="ik ik-command"></i><span>Icons</span></a>
-                    </div>
-                    <div class="nav-lavel">Forms</div>
-                    <div class="nav-item has-sub">
-                        <a href="#"><i class="ik ik-edit"></i><span>Forms</span></a>
-                        <div class="submenu-content">
-                            <a href="pages/form-components.html" class="menu-item">Components</a>
-                            <a href="pages/form-addon.html" class="menu-item">Add-On</a>
-                            <a href="pages/form-advance.html" class="menu-item">Advance</a>
-                        </div>
-                    </div>
-                    <div class="nav-item">
-                        <a href="pages/form-picker.html"><i class="ik ik-terminal"></i><span>Form Picker</span>
-                            <span class="badge badge-success">New</span></a>
-                    </div>
-                    <div class="nav-lavel">Tables</div>
-                    <div class="nav-item">
-                        <a href="pages/table-bootstrap.html"><i class="ik ik-credit-card"></i><span>Bootstrap Table</span></a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="pages/table-datatable.html"><i class="ik ik-inbox"></i><span>Data Table</span></a>
-                    </div>
-                    <div class="nav-lavel">Charts</div>
-                    <div class="nav-item has-sub">
-                        <a href="#"><i class="ik ik-pie-chart"></i><span>Charts</span>
-                            <span class="badge badge-success">New</span></a>
-                        <div class="submenu-content">
-                            <a href="pages/charts-chartist.html" class="menu-item active">Chartist</a>
-                            <a href="pages/charts-flot.html" class="menu-item">Flot</a>
-                            <a href="pages/charts-knob.html" class="menu-item">Knob</a>
-                            <a href="pages/charts-amcharts.html" class="menu-item">Amcharts</a>
-                        </div>
-                    </div>
-                    <div class="nav-lavel">Apps</div>
-                    <div class="nav-item">
-                        <a href="pages/calendar.html"><i class="ik ik-calendar"></i><span>Calendar</span></a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="pages/taskboard.html"><i class="ik ik-server"></i><span>Taskboard</span></a>
-                    </div>
-                    <div class="nav-lavel">Pages</div>
-                    <div class="nav-item has-sub">
-                        <a href="#"><i class="ik ik-lock"></i><span>Authentication</span></a>
-                        <div class="submenu-content">
-                            <a href="pages/login.html" class="menu-item">Login</a>
-                            <a href="pages/register.html" class="menu-item">Register</a>
-                            <a href="pages/forgot-password.html" class="menu-item">Forgot Password</a>
-                        </div>
-                    </div>
-                    <div class="nav-item has-sub">
-                        <a href="#"><i class="ik ik-file-text"></i><span>Other</span></a>
-                        <div class="submenu-content">
-                            <a href="pages/profile.html" class="menu-item">Profile</a>
-                            <a href="pages/invoice.html" class="menu-item">Invoice</a>
-                        </div>
-                    </div>
-                    <div class="nav-item">
-                        <a href="pages/layouts.html"><i class="ik ik-layout"></i><span>Layouts</span><span class="badge badge-success">New</span></a>
-                    </div>
-                    <div class="nav-lavel">Other</div>
-                    <div class="nav-item has-sub">
-                        <a href="javascript:void(0)"><i class="ik ik-list"></i><span>Menu Levels</span></a>
-                        <div class="submenu-content">
-                            <a href="javascript:void(0)" class="menu-item">Menu Level 2.1</a>
-                            <div class="nav-item has-sub">
-                                <a href="javascript:void(0)" class="menu-item">Menu Level 2.2</a>
-                                <div class="submenu-content">
-                                    <a href="javascript:void(0)" class="menu-item">Menu Level 3.1</a>
-                                </div>
-                            </div>
-                            <a href="javascript:void(0)" class="menu-item">Menu Level 2.3</a>
-                        </div>
-                    </div>
-                    <div class="nav-item">
-                        <a href="javascript:void(0)" class="disabled"><i class="ik ik-slash"></i><span>Disabled Menu</span></a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="javascript:void(0)"><i class="ik ik-award"></i><span>Sample Page</span></a>
-                    </div>
-                    <div class="nav-lavel">Support</div>
-                    <div class="nav-item">
-                        <a href="javascript:void(0)"><i class="ik ik-monitor"></i><span>Documentation</span></a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="javascript:void(0)"><i class="ik ik-help-circle"></i><span>Submit Issue</span></a>
-                    </div>
-                </nav>
-            </div>
-        </div>
+<!-- 左侧菜单开始 -->
+<div class="left-nav">
+    <div id="side-nav">
+        <ul id="nav">
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
+                    <cite>会员管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('统计页面','welcome1.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>统计页面</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('会员列表(静态表格)','member-list.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>会员列表(静态表格)</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('会员列表(动态表格)','member-list1.html',true)">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>会员列表(动态表格)</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('会员删除','member-del.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>会员删除</cite></a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe70b;</i>
+                            <cite>会员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('会员删除','member-del.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员删除</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('等级管理','member-list1.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>等级管理</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
+                    <cite>订单管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单列表</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单列表1</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="分类管理">&#xe723;</i>
+                    <cite>分类管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('多级分类','cate.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>多级分类</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="城市联动">&#xe723;</i>
+                    <cite>城市联动</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('三级地区联动','city.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>三级地区联动</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
+                    <cite>管理员管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('管理员列表','admin-list.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>管理员列表</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('角色管理','admin-role.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>角色管理</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('权限分类','admin-cate.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>权限分类</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('权限管理','admin-rule.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>权限管理</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="系统统计">&#xe6ce;</i>
+                    <cite>系统统计</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('拆线图','echarts1.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>拆线图</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('拆线图','echarts2.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>拆线图</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('地图','echarts3.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>地图</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('饼图','echarts4.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>饼图</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('雷达图','echarts5.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>雷达图</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('k线图','echarts6.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>k线图</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('热力图','echarts7.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>热力图</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('仪表图','echarts8.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>仪表图</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="图标字体">&#xe6b4;</i>
+                    <cite>图标字体</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('图标对应字体','unicode.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>图标对应字体</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="其它页面">&#xe6b4;</i>
+                    <cite>其它页面</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="login.html" target="_blank">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>登录页面</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('错误页面','error.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>错误页面</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('示例页面','demo.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>示例页面</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('更新日志','log.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>更新日志</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="第三方组件">&#xe6b4;</i>
+                    <cite>layui第三方组件</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('滑块验证','https://fly.layui.com/extend/sliderVerify/')" target="">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>滑块验证</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('富文本编辑器','https://fly.layui.com/extend/layedit/')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>富文本编辑器</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('eleTree 树组件','https://fly.layui.com/extend/eleTree/')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>eleTree 树组件</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('图片截取','https://fly.layui.com/extend/croppers/')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>图片截取</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('formSelects 4.x 多选框','https://fly.layui.com/extend/formSelects/')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>formSelects 4.x 多选框</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('Magnifier 放大镜','https://fly.layui.com/extend/Magnifier/')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Magnifier 放大镜</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('notice 通知控件','https://fly.layui.com/extend/notice/')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>notice 通知控件</cite></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
+</div>
+<!-- <div class="x-slide_left"></div> -->
+<!-- 左侧菜单结束 -->

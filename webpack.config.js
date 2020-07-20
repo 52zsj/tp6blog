@@ -12,21 +12,22 @@ module.exports = {
     },
     optimization: {
         usedExports: true,
-        // splitChunks: {
-        //     cacheGroups: {
-        //         commons: {
-        //             name: "commons",
-        //             chunks: "initial",
-        //             minChunks: 2
-        //         }
-        //     }
-        // }
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    name: 'commons',
+                    chunks: 'initial',
+                    test: '/\.css$/',  // 只提取公共css ，命名可改styles
+                    minChunks: 2
+                }
+            }
+        }
     },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            axios: 'axios'
+            axios: 'axios',
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output

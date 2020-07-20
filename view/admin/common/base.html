@@ -1,37 +1,48 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="x-admin-sm">
 <head>
-    {include file='common/meta'/}
+    {include file='common/meta'}
     {block name='css'}
-
+    
     {/block}
-    <script src="__BACKEND_SOURCE__/common/js/modernizr-2.8.3.min.js"></script>
+    <script>
+        // 是否开启刷新记忆tab功能
+        var is_remember = true;
+    </script>
 </head>
-
-<body>
-{include file='common/chrome_update'/}
-
-<div class="wrapper">
-    {include file='common/header'/}
-    <div class="page-wrap">
-        {include file='common/menu'/}
-        <div class="main-content">
-            {block name='content'}
-            
-            {/block}
+<body class="index">
+{include file='common/header'}
+<!-- 中部开始 -->
+{include file='common/menu'}
+<!-- 右侧主体开始 -->
+<div class="page-content">
+    <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+        <ul class="layui-tab-title">
+            <li class="home">
+                <i class="layui-icon">&#xe68e;</i>我的桌面</li></ul>
+        <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+            <dl>
+                <dd data-type="this">关闭当前</dd>
+                <dd data-type="other">关闭其它</dd>
+                <dd data-type="all">关闭全部</dd></dl>
         </div>
-        <footer class="footer">
-            <div class="w-100 clearfix">
-                <span class="text-center text-sm-left d-md-inline-block">Copyright © 2020 Aojie v2.0.版权所有.</span>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                {block name='content'}
+                
+                {/block}
             </div>
-        </footer>
+        </div>
+        <div id="tab_show"></div>
     </div>
 </div>
-
+<div class="page-content-bg"></div>
+<style id="theme_style"></style>
+<!-- 右侧主体结束 -->
+<!-- 中部结束 -->
 </body>
 </html>
-
 {block name='js'}
 
 {/block}
-{include file='common/script'/}
+{include file='common/script'}

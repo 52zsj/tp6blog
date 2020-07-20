@@ -6,3 +6,4 @@
 public/nginx.htaccess
 node_modules
 public/static/backend
+package-lock.json

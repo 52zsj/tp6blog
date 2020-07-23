@@ -14,14 +14,14 @@ module.exports = {
         usedExports: true,
         splitChunks: {
             cacheGroups: {
-                vendor: {
-                    name: 'commons',
-                    chunks: 'initial',
-                    test: '/\.css$/',  // 只提取公共css ，命名可改styles
-                    minChunks: 2
-                }
-            }
-        }
+                styles: {
+                    name: 'styles',
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true,
+                },
+            },
+        },
     },
     plugins: [
         new webpack.ProvidePlugin({

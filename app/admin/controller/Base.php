@@ -11,8 +11,6 @@ namespace app\admin\controller;
 use app\admin\library\Auth;
 use app\BaseController;
 use app\common\libray\traits\Admin;
-use app\common\libray\Tree;
-use app\common\model\AuthRule;
 use think\facade\Session;
 use think\facade\View;
 
@@ -37,8 +35,16 @@ class Base extends BaseController
      * @var null
      */
     protected $auth = null;
-
-    protected $model =null;
+    /**
+     * 当前模型
+     * @var null
+     */
+    protected $model = null;
+    /**
+     * 默认配置文件
+     * @var array
+     */
+    protected $config = [];
 
     use Admin;
 
@@ -51,6 +57,7 @@ class Base extends BaseController
         $this->request->noNeedLogin = $this->noNeedLogin;
         $this->request->noNeedRight = $this->noNeedRight;
         $this->auth                 = Auth::instance();
+
         // 设置当前请求的URI
         $this->auth->setRequestUri($this->path);
         // 检测是否需要验证登录
@@ -72,28 +79,34 @@ class Base extends BaseController
                 }
             }
         }
-        //获取所有权限菜单
-        $menuList = AuthRule::where('status', '=', '1')->where('is_menu', 1)->select()->toArray();
-        foreach ($menuList as $k => &$v) {
-            $v['url']       = '/' . $v['name'];
-            $v['route_url'] = (string)url($v['route_name']);
-        }
-        Tree::instance()->init($menuList);
-        $tpl  = '<li><a href="javascript:;" onclick="xadmin.add_tab(\'@title\',\'@url\')"><i class="@icon" lay-tips="@title"></i><cite>@title</cite></i></a>@childlist</li>';
-        $menu = Tree::instance()->getTreeUl(0, $tpl, '', '', 'ul', 'class="sub-menu"');
-
+        // //获取所有权限菜单
+        // $menuList = AuthRule::where('status', '=', '1')->where('is_menu', 1)->select()->toArray();
+        // foreach ($menuList as $k => &$v) {
+        //     $v['url']       = '/' . $v['name'];
+        //     $v['route_url'] = (string)url($v['route_name']);
+        // }
+        // Tree::instance()->init($menuList);
+        // $tpl  = '<li><a href="javascript:;" onclick="xadmin.add_tab(\'@title\',\'@url\')"><i class="@icon" lay-tips="@title"></i><cite>@title</cite></i></a>@childlist</li>';
+        // $menu = Tree::instance()->getTreeUl(0, $tpl, '', '', 'ul', 'class="sub-menu"');
+        // View::assign('config', $this->config);
 
         //统一渲染
-        $config = ['action' => $this->actionName];
-        $option = [
+        $this->config = [
+            'app_name'        => $this->appName,
+            'controller_name' => $this->controllerName,
+            'action_name'     => $this->actionName,
+            'js_name'         => 'backend/' . strtolower(str_replace('.', '/', $this->controllerName)),
+            'module_url'      => rtrim(url('/' . $this->appName, [], false), '/'),
+            'version'         => '0.0.1',
+        ];
+        $option       = [
             'auth'       => $this->auth,
             'admin'      => Session::get('admin'),
-            'config'     => $config,
-            'menu'       => $menu,
+            'config'     => $this->config,
             'controller' => $this->controllerName,
             'action'     => $this->actionName,
             'app'        => $this->appName,
-            'path'        => $this->path,
+            'path'       => $this->path,
         ];
         View::assign($option);
     }

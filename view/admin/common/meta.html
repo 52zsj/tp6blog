@@ -1,12 +1,13 @@
-<meta charset="UTF-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>{$title|default='傲杰笔记'}</title>
-<meta name="description" content="">
-<meta name="keywords" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>标题啊</title>
+<!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<link rel="icon" href="__BACKEND_SOURCE__/images/favicon.svg" type="image/x-icon" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
-<meta http-equiv="Cache-Control" content="no-siteapp"/>
-<link rel="stylesheet" href="__CSS__/{$controller|default='index'}.css">
+<link rel="shortcut icon" href="/static/source/img/favicon.svg">
+<link rel="stylesheet" href="__BS__/css/backend{$Request.ENV.APP_DEBUG?'':'.min'}.css">
+
+<script type="text/javascript">
+    var require = {
+        config:  {$config|json_encode}
+    };
+</script>

@@ -1,4 +1,4 @@
 {
-  "directory": "public/assets/libs",
+  "directory": "public/static/source/libs",
   "ignoredDependencies": []
 }

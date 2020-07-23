@@ -1,4 +1,3 @@
-<script>
-    Controller.{$config.action}();
+<script src="/static/source/js/require{$Request.ENV.APP_DEBUG?'':'.min'}.js" data-main="/static/source/js/require-backend{$Request.ENV.APP_DEBUG?'':'.min'}.js?v={$config.version}">
+
 </script>
-{include file='common/common_tool'/}

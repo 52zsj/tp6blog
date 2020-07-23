@@ -1,12 +1,23 @@
 {
-  "name": "fastadmin",
-  "description": "the fastest admin framework",
+  "name": "aojie",
+  "description": "aojie",
   "main": "",
   "license": "Apache2.0",
-  "homepage": "http://www.fastadmin.net",
+  "homepage": "https://52zsj.com",
   "private": true,
   "dependencies": {
     "jquery": "^3.3.1",
-    "bootstrap": "^4.1.3"
+    "bootstrap": "^4.1.3",
+    "icheck-bootstrap": "^3.0.1",
+    "moment": "^2.20.1",
+    "require-css": "^0.1.10",
+    "nice-validator": "^1.1.5",
+    "art-template": "^3.1.3",
+    "bootstrap-table": "fastadmin-bootstraptable#~1.11.3",
+    "toastr": "^2.1.3",
+    "font-awesome": "^4.*",
+    "axios": "^0.19.2",
+    "layer": "^3.1.1"
+
   }
 }

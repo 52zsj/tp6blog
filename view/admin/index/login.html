@@ -1,45 +1,88 @@
-<!doctype html>
-<html class="x-admin-sm">
+<!DOCTYPE html>
+<html>
 <head>
     {include file='common/meta'/}
-    <link rel="stylesheet" href="__CSS__/login.css">
+    <style>
+        .profile-img-card {
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+        
+        .profile-name-card {
+            text-align: center;
+        }
+        
+        .captcha-img {
+            width: 150px;
+        }
+        
+        .login-page {
+            color: #999;
+            background-image: url("/static/source/img/loginbg.jpg");
+            background-size: cover;
+        }
+    </style>
 </head>
-<body class="login-bg">
-<div class="login layui-anim layui-anim-up">
-    <div class="message">傲杰后台管理系统</div>
-    <div id="darkbannerwrap"></div>
-    <!--<img id="profile-img" class="profile-img-card" src="__BACKEND_SOURCE__/images/avatar.png">-->
-    <form class="layui-form form-horizontal" data-toggle="validator" method="POST" role="form">
-        <div class="layui-form-item">
-            <input name="user_name" placeholder="用户名" data-form-label="用户名" type="text" data-rule="required" class="layui-input">
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">
+                <img class="profile-img-card" src="__BS__/img/avatar.png" alt="">
+            </p>
+            <form class="layui-form form-horizontal" data-toggle="validator" method="POST" role="form">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="user_name" placeholder="用户名">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fa fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="密码">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fa fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                
+                    <input type="text" class="form-control" name="captcha" placeholder="验证码">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fa fa-calculator"></span>
+                        </div>
+                    </div>
+                    <img src="{:captcha_src()}" alt="" class="captcha-img" onclick="this.src='/captcha.html/s/'+Math.random()"/>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="icheck-danger">
+                            <input type="checkbox" name="keep_login" class="" id="remember">
+                            <label for="remember">保持会话</label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary btn-block">登录</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
         </div>
-        <hr class="hr15">
-        <div class="layui-form-item">
-            <input name="password" placeholder="密码" data-form-label="密码" data-rule="required" type="password" class="layui-input">
-        </div>
-        <hr class="hr15">
-        <div class="layui-form-item">
-            <input name="captcha" placeholder="验证码" data-form-label="验证码" data-rule="required" type="text" class="layui-input" id="captcha">
-            <img src="{:captcha_src()}" class="captcha-img" id="captcha-img" onclick="this.src='/captcha.html/s/'+Math.random()">
-        </div>
-        <hr class="hr15">
-        <div class="layui-form-item">
-            <input type="checkbox" name="keep_login" title="记住我，下次直接登录" value="1" lay-skin="primary">
-        </div>
-        <hr class="hr15">
-        <input value="登录" style="width:100%;" type="submit">
-        <hr class="hr15">
-    </form>
+        <!-- /.login-card-body -->
+    </div>
 </div>
-<script src="__JS__/login.bundle.js"></script>
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?e5978f354aedf1b283dcecd75c9f8a4b";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+{include file='common/script'/}
 </body>
 </html>

@@ -2,7 +2,6 @@ define(['jquery', 'bootstrap','form'], function ($, undefined,Form) {
     var Controller = {
         index: function () {
             console.log('index方法被执行');
-
         },
         login: function () {
             var form = $('form[role="form"]');

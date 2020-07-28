@@ -63,11 +63,11 @@ define(['jquery', 'bootstrap', 'toastr', 'axios','layer'], function ($, undefine
             axios: function (options, success, error) {
                 options = typeof options === 'string' ? {url: options} : options;
                 var index;
-                console.log(typeof options.loading);return
                 if (typeof options.loading != 'undefined') {
                     index = layer.load(options.loading || 0);
                 }
                 axios(options).then(function (response) {
+                    index&&layer.close(index);
                     var ret = Aojie.events.onAxiosResponse(response);
                     if (ret.code === 1) {
                         Aojie.events.onAxiosSuccess(ret, success)
@@ -75,6 +75,7 @@ define(['jquery', 'bootstrap', 'toastr', 'axios','layer'], function ($, undefine
                         Aojie.events.onAxiosError(ret, error);
                     }
                 }).catch(function (response) {
+                    index&&layer.close(index);
                     var ret = Aojie.events.onAxiosResponse(response);
                     Aojie.events.onAxiosError(ret, error);
                 });

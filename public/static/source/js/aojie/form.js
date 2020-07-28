@@ -103,7 +103,7 @@ define(['jquery', 'bootstrap', 'validator','aojie'], function ($, undefined, Val
                 type = type && (type === 'GET' || type === 'POST') ? type : 'GET';
                 var url = form.attr("action");
                 url = url ? url : location.href;
-                var loading = form.attr('need-loading');
+                var loading = form.attr('data-loading');
                 loading = typeof loading == 'undefind' ? null : loading;
                 //修复当存在多选项元素时提交的BUG
                 var params = {};

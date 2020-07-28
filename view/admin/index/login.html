@@ -38,7 +38,7 @@
             <p class="login-box-msg">
                 <img class="profile-img-card" src="__BS__/img/avatar.png" alt="">
             </p>
-            <form class="layui-form form-horizontal" data-toggle="validator" method="POST" role="form">
+            <form class="layui-form form-horizontal" data-toggle="validator" method="POST" role="form" data-loading="3">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="user_name" placeholder="用户名">
                     <div class="input-group-append">
@@ -56,7 +56,6 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                
                     <input type="text" class="form-control" name="captcha" placeholder="验证码">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -67,9 +66,9 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="icheck-danger">
+                        <div class="icheck-cyan">
                             <input type="checkbox" name="keep_login" class="" id="remember">
-                            <label for="remember">保持会话</label>
+                            <label for="remember" class="form-check-label">记住我，下次自动登录</label>
                         </div>
                     </div>
                     <!-- /.col -->

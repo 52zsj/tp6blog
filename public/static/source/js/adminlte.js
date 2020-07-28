@@ -389,7 +389,6 @@
           if (offset !== false) {
             $(Selector.CONTENT).css('min-height', max + offset - heights.header - heights.footer);
           }
-
           if (typeof $.fn.overlayScrollbars !== 'undefined') {
             $(Selector.SIDEBAR).overlayScrollbars({
               className: this._config.scrollbarTheme,

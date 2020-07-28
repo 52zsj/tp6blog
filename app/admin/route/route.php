@@ -11,6 +11,10 @@ Route::group('index', function () {
     Route::rule('logout', 'logout')->name('index_logout');
 })->prefix('admin/index/');
 
+Route::group('dashboard', function () {
+    Route::rule('index', 'index')->name('dashboard_index');
+});
+
 Route::group('auth/rule', function () {
     Route::rule('index', 'index')->name('auth_rule_index');
     Route::rule('add', 'add')->name('auth_rule_add');
@@ -24,8 +28,6 @@ Route::group('auth/admin', function () {
     Route::rule('add', 'add')->name('auth_admin_add');
     Route::rule('edit', 'edit')->name('auth_admin_edit');
 })->prefix('admin/auth.admin/');
-
-
 
 
 Route::get('captcha/[:s]', '\\think\\captcha\\CaptchaController@index');

@@ -7,7 +7,7 @@ require.config({
         main: 'moment'
     }],
     //在打包压缩时将会把include中的模块合并到主文件中
-    include: ['css','layer'],
+    include: ['css', 'layer', 'overlayScrollbars', 'backend', 'adminlte'],
 
     map: {
         '*': {
@@ -25,22 +25,27 @@ require.config({
         'validator-core': '../libs/nice-validator/dist/jquery.validator',
         'validator-lang': '../libs/nice-validator/dist/local/zh-CN',
         'axios': '../libs/axios/dist/axios.min',
-        'layer':'../libs/layer/dist/layer'
+        'layer': '../libs/layer/dist/layer',
+        'overlayScrollbars': '../libs/overlayScrollbars/js/jquery.overlayScrollbars.min'
     },
     shim: {
         'adminlte': {
             deps: ['bootstrap'],
-            exports: '$.AdminLTE'
+            exports: "$.AdminLTE"
         },
         'axios': {
             exports: 'axios',
-        }
+        },
+        'overlayScrollbars': {
+            deps: ['jquery'],
+            exports: "$.fn.overlayScrollbars"
+        },
     },
     waitSeconds: 30,
     charset: 'utf-8' // 文件编码
 });
 
-require(['jquery', 'bootstrap'], function ($, undefined) {
+require(['jquery', 'bootstrap', 'overlayScrollbars'], function ($, undefined, undefined) {
     //初始配置
     var Config = requirejs.s.contexts._.config.config;
     //将Config渲染到全局
@@ -53,22 +58,23 @@ require(['jquery', 'bootstrap'], function ($, undefined) {
     // 初始化
     $(function () {
         require(['aojie'], function (Aojie) {
-            //加载相应模块
-            //加载相应模块
-            if (Config.js_name) {
-                require([Config.js_name], function (Controller) {
-                    if (Controller.hasOwnProperty(Config.action_name)) {
-                        Controller[Config.action_name]();
-                    } else {
-                        if (Controller.hasOwnProperty("_empty")) {
-                            Controller._empty();
+            require(['backend'], function (Backend) {
+                //加载相应模块
+                if (Config.js_name) {
+                    require([Config.js_name], function (Controller) {
+                        if (Controller.hasOwnProperty(Config.action_name)) {
+                            Controller[Config.action_name]();
+                        } else {
+                            if (Controller.hasOwnProperty("_empty")) {
+                                Controller._empty();
+                            }
                         }
-                    }
-                }, function (e) {
-                    console.error(e);
-                    // 这里可捕获模块加载的错误
-                });
-            }
+                    }, function (e) {
+                        console.error(e);
+                        // 这里可捕获模块加载的错误
+                    });
+                }
+            })
         });
     });
 });

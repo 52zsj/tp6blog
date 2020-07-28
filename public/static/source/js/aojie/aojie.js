@@ -18,6 +18,9 @@ define(['jquery', 'bootstrap', 'toastr', 'axios','layer'], function ($, undefine
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
+            },
+            overlayScrollbars:{
+
             }
         },
         events: {

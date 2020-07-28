@@ -24,9 +24,13 @@ return [
     'taglib_end'         => '}',
     // 默认过滤方法 用于普通标签输出
     'default_filter'     => '',
+    //模板变量替换
     'tpl_replace_string' => [
         '__CSS__' => '/static/backend/css',
         '__JS__'  => '/static/backend/js',
         '__BS__'  => '/static/source'
-    ]
+    ],
+    // 'layout_on'          => true, // 布局模板开关
+    // 'layout_name'        => 'layout/layout', // 布局模板入口文件
+    // 'layout_item'        => '{__CONTENT__}', // 布局模板的内容替换标识
 ];

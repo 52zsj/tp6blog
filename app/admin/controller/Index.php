@@ -20,6 +20,7 @@ class Index extends Base
 
     public function index()
     {
+        View::assign('menum',url('dashboard_index'));
         return View::fetch();
     }
 

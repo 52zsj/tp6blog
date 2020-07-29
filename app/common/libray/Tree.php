@@ -326,6 +326,18 @@ class Tree
         return $str;
     }
 
+    public function getTreeMenus($myid, $itemtpl, $selectedids = '', $disabledids = '', $wraptag = 'ul', $wrapattr = '', $deeplevel = 0)
+    {
+        $str = '';
+        //顶级
+        $childs = $this->getChild($myid);
+        if ($childs) {
+            foreach ($childs as $value) {
+                dump($value);exit();
+            }
+        }
+
+    }
     /**
      * 特殊
      * @param integer $myid 要查询的ID

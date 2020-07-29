@@ -45,17 +45,11 @@ require.config({
     charset: 'utf-8' // 文件编码
 });
 
-require(['jquery', 'bootstrap', 'overlayScrollbars'], function ($, undefined, undefined) {
+require(['jquery', 'bootstrap', 'overlayScrollbars', 'adminlte'], function ($, undefined, undefined, undefined) {
     //初始配置
     var Config = requirejs.s.contexts._.config.config;
     //将Config渲染到全局
     window.Config = Config;
-    // 配置语言包的路径
-    // var paths = {};
-    // // 避免目录冲突
-    // paths['backend/'] = 'backend/';
-    // require.config({paths: paths});
-    // 初始化
     $(function () {
         require(['aojie'], function (Aojie) {
             require(['backend'], function (Backend) {

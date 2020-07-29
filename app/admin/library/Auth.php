@@ -122,6 +122,18 @@ class Auth extends \app\common\libray\Auth
     }
 
     /**
+     * 获得权限列表
+     * @param integer $uid 用户id
+     * @param integer $type
+     * return array
+     */
+    public function getRuleList($uid='')
+    {
+        $uid = $uid ?: $this->id;
+        return parent::getRuleList($uid);
+    }
+
+    /**
      * 检测是否登录
      * @return boolean
      */

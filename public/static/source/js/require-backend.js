@@ -26,7 +26,8 @@ require.config({
         'validator-lang': '../libs/nice-validator/dist/local/zh-CN',
         'axios': '../libs/axios/dist/axios.min',
         'layer': '../libs/layer/dist/layer',
-        'overlayScrollbars': '../libs/overlayScrollbars/js/jquery.overlayScrollbars.min'
+        'overlayScrollbars': '../libs/overlayScrollbars/js/jquery.overlayScrollbars.min',
+        'bootstrap-table':'../libs/bootstrap-table/dist/bootstrap-table.min'
     },
     shim: {
         'adminlte': {

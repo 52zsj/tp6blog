@@ -11,6 +11,7 @@ namespace app\admin\controller;
 use app\admin\library\Auth;
 use app\BaseController;
 use app\common\libray\traits\Admin;
+use app\common\libray\Tree;
 use app\common\model\AuthRule;
 use think\facade\Session;
 use think\facade\View;
@@ -80,7 +81,9 @@ class Base extends BaseController
                 }
             }
         }
-
+        $breadcrumb = $this->auth->getBreadCrumb($this->path);
+        array_pop($breadcrumb);
+        $menu = $this->getMenu();
         //统一渲染
         $this->config = [
             'app_name'        => $this->appName,
@@ -98,8 +101,85 @@ class Base extends BaseController
             'action'     => $this->actionName,
             'app'        => $this->appName,
             'path'       => $this->path,
+            'breadcrumb' => $breadcrumb,
+            'menu' => $menu,
         ];
         View::assign($option);
+    }
+
+    protected function getMenu()
+    {
+        $userRule  = $this->auth->getRuleList();
+        $pinyin    = new \Overtrue\Pinyin\Pinyin('Overtrue\Pinyin\MemoryFileDictLoader');
+        $badgeList = $selected = $referer = [];
+        $fixedPage = 'dashboard';
+        //所有的菜单
+        $ruleList      = AuthRule::where('status', '=', '1')
+            ->where('is_menu', 1)
+            // ->cache('__menu__')
+            ->select()
+            ->toArray();
+        $indexRuleList = AuthRule::where('status', '1')
+            ->where('is_menu', 0)
+            ->where('name', 'like', '%/index')
+            ->column('pid', 'name');
+
+        //找到非0 的父级ID  可能存在多级的情况
+        $pidArr = array_filter(array_unique(array_column($ruleList, 'pid')));
+        //筛查用户是否有主页权限
+        foreach ($ruleList as $k => &$v) {
+            //不是该用户的权限 剃掉
+            if (!in_array($v['name'], $userRule)) {
+                unset($ruleList[$k]);
+                continue;
+            }
+            $indexRuleName = $v['name'] . '/index';
+            if (isset($indexRuleList[$indexRuleName]) && !in_array($indexRuleName, $userRule)) {
+                unset($ruleList[$k]);
+                continue;
+            }
+            $v['icon']   = $v['icon'] . ' fa-fw';
+            $v['url']    = '/' .$indexRuleName;
+            $v['py']     = $pinyin->abbr($v['title'], '');
+            $v['pinyin'] = $pinyin->permalink($v['title'], '');
+            $selected    = $v['name'] == $fixedPage ? $v : $selected;
+        }
+        // dump($selected);exit();
+        unset($v);
+        $lastArr = array_diff($pidArr, array_filter(array_unique(array_column($ruleList, 'pid'))));
+        foreach ($ruleList as $index => $item) {
+            if (in_array($item['id'], $lastArr)) {
+                unset($ruleList[$index]);
+            }
+        }
+
+        //
+        // $selectId = $selected ? $selected['id'] : 0;
+
+        $menu = $nav = '';
+        // // 构造菜单数据
+        Tree::instance()->init($ruleList);
+//        menu-open 'active'
+        $template = ' <li class="nav-item @liclass">
+                        <a href="@url" class="nav-link @class" py="@py" pinyin="@pinyin">
+                            <i class="nav-icon fa @icon"></i>
+                            <p>
+                                @title
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        @childlist
+            </li>';
+        // //   <li class="nav-item has-treeview"><a href="@url" url="@url"  py="@py" pinyin="@pinyin" class="nav-link"><i class="nav-icon @icon"></i><p>@title<i class="right fa fa-angle-left"></i></p></a>@childlist<li>'
+        $menu = Tree::instance()->getTreeMenu(
+            0,
+            $template,
+            '',
+            '',
+            'ul',
+            'class="nav nav-treeview"'
+        );
+        return $menu;
     }
 
 }

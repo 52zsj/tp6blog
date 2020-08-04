@@ -7,9 +7,7 @@
 
 namespace app\admin\controller;
 
-use app\common\model\AuthRule;
 use think\App;
-use think\facade\Session;
 use think\facade\Validate;
 use think\facade\View;
 
@@ -22,87 +20,8 @@ class Index extends Base
 
     public function index()
     {
-        // //获取所有权限菜单
-        $module     = $this->appName;
-        $refererUrl = Session::get('referer');
-        $userRule   = $this->auth->getRuleList();
-        $pinyin     = new \Overtrue\Pinyin\Pinyin('Overtrue\Pinyin\MemoryFileDictLoader');
-        $badgeList  = $selected = $referer = [];
-        $fixedPage  = 'dashboard';
-        //所有的菜单
-        $ruleList = AuthRule::where('status', '=', '1')
-            ->where('is_menu', 1)
-            ->cache('__menu__')
-            ->select()
-            ->toArray();
-
-        $indexRuleList = AuthRule::where('status', '1')
-            ->where('is_menu', 0)
-            ->where('name', 'like', '%/index')
-            ->column('name,pid');
-
-        $pidArr = array_filter(array_unique(array_map(function ($item) {
-            return $item['pid'];
-        }, $ruleList)));
-
-        //
-        foreach ($ruleList as $k => &$v) {
-            if (!in_array($v['name'], $userRule)) {
-                unset($ruleList[$k]);
-                continue;
-            }
-            $indexRuleName = $v['name'];
-            if (isset($indexRuleList[$indexRuleName]) && !in_array($indexRuleName, $userRule)) {
-                unset($ruleList[$k]);
-                continue;
-            }
-            $v['icon']   = $v['icon'] . ' fa-fw';
-            $v['url']    = '/' . $v['name'];
-            $v['badge']  = isset($badgeList[$v['name']]) ? $badgeList[$v['name']] : '';
-            $v['py']     = $pinyin->abbr($v['title'], '');
-            $v['pinyin'] = $pinyin->permalink($v['title'], '');
-            $selected    = $v['name'] == $fixedPage ? $v : $selected;
-            $referer     = url($v['url']) == $refererUrl ? $v : $referer;
-            dump($selected);
-            dump($referer);exit();
-        }
-
-        $lastArr = array_diff($pidArr, array_filter(array_unique(array_map(function ($item) {
-            return $item['pid'];
-        }, $ruleList))));
-        foreach ($ruleList as $index => $item) {
-            if (in_array($item['id'], $lastArr)) {
-                unset($ruleList[$index]);
-            }
-        }
-        var_dump($selected);
-        var_dump($referer);
-
-
-        exit();
-        // if ($selected == $referer) {
-        //     $referer = [];
-        // }
-        // $selected && $selected['url'] = url($selected['url']);
-        // $referer && $referer['url'] = url($referer['url']);
-        //
-        // $select_id = $selected ? $selected['id'] : 0;
-        // $menu = $nav = '';
-        // // 构造菜单数据
-        // Tree::instance()->init($ruleList);
-        // //   <li class="nav-item has-treeview"><a href="@url" url="@url"  py="@py" pinyin="@pinyin" class="nav-link"><i class="nav-icon @icon"></i><p>@title<i class="right fa fa-angle-left"></i></p></a>@childlist<li>'
-        // $menu = Tree::instance()->getTreeMenu(
-        //     0,
-        //     '<li class="nav-item has-treeview"><a href="@url" url="@url"  py="@py" pinyin="@pinyin" class="nav-link"><i class="nav-icon @icon"></i><p>@title<i class="right fa fa-angle-left"></i></p></a>@childlist<li>',
-        //     $select_id,
-        //     '',
-        //     'ul',
-        //     'class="nav nav-treeview"'
-        // );
-        // View::assign('menu',$menu);
         return View::fetch();
     }
-
 
     public function login()
     {

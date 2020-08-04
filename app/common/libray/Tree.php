@@ -30,7 +30,8 @@ class Tree
     public $pidname = 'pid';
     public $idname = 'id';
 
-    public function __construct($options = []) {
+    public function __construct($options = [])
+    {
         if ($config = Config::get('tree')) {
             $this->options = array_merge($this->config, $config);
         }
@@ -43,7 +44,8 @@ class Tree
      * @param array $options 参数
      * @return Tree
      */
-    public static function instance($options = []) {
+    public static function instance($options = [])
+    {
         if (is_null(self::$instance)) {
             self::$instance = new static($options);
         }
@@ -299,45 +301,35 @@ class Tree
             foreach ($childs as $value) {
                 $id = $value[$this->idname];
                 unset($value['child']);
-                $selected = in_array($id, (is_array($selectedids) ? $selectedids : explode(',', $selectedids))) ? 'selected' : '';
-                $disabled = in_array($id, (is_array($disabledids) ? $disabledids : explode(',', $disabledids))) ? 'disabled' : '';
-                $value = array_merge($value, array('selected' => $selected, 'disabled' => $disabled));
-                $value = array_combine(array_map(function ($k) {
+                //选中项目
+                $selected  = in_array($id, (is_array($selectedids) ? $selectedids : explode(',', $selectedids))) ? 'selected' : '';
+                $value     = array_merge($value, array('selected' => $selected));
+                $value     = array_combine(array_map(function ($k) {
                     return '@' . $k;
                 }, array_keys($value)), $value);
-                $bakvalue = array_intersect_key($value, array_flip(['@url', '@caret', '@class']));
-                $value = array_diff_key($value, $bakvalue);
-                $nstr = strtr($itemtpl, $value);
-                $value = array_merge($value, $bakvalue);
+                $bakvalue  = array_intersect_key($value, array_flip(['@url', '@caret', '@class']));
+                $value     = array_diff_key($value, $bakvalue);
+
+                $nstr      = strtr($itemtpl, $value);
+                $value     = array_merge($value, $bakvalue);
                 $childdata = $this->getTreeMenu($id, $itemtpl, $selectedids, $disabledids, $wraptag, $wrapattr, $deeplevel + 1);
                 $childlist = $childdata ? "<{$wraptag} {$wrapattr}>" . $childdata . "</{$wraptag}>" : "";
-                $childlist = strtr($childlist, array('@class' => $childdata ? 'last' : ''));
-                $value = array(
+                $childlist = strtr($childlist, array('@liclass' => empty($childdata)==true ? '' : 'has-treeview'));
+                $value     = array(
                     '@childlist' => $childlist,
-                    '@url' => $childdata || !isset($value['@url']) ? "javascript:;" : url($value['@url']),
-                    '@addtabs' => $childdata || !isset($value['@url']) ? "" : (stripos($value['@url'], "?") !== false ? "&" : "?") . "ref=addtabs",
-                    '@caret' => ($childdata && (!isset($value['@badge']) || !$value['@badge']) ? '<i class="fa fa-angle-left"></i>' : ''),
-                    '@badge' => isset($value['@badge']) ? $value['@badge'] : '',
-                    '@class' => ($selected ? ' active' : '') . ($disabled ? ' disabled' : '') . ($childdata ? ' treeview' : ''),
+                    '@url'       => $childdata || !isset($value['@url']) ? "javascript:;" : $value['@url'],
+                    '@class'     => ($selected ? ' active' : ''),
+                    '@liclass'   => (empty($childlist) == true ? '' : 'has-treeview') .($selected ? 'menu-open':'') ,
                 );
-                $str .= strtr($nstr, $value);
+                $str       .= strtr($nstr, $value);
+                if (empty($childlist)) {
+                    $str = str_replace('<i class="right fa fa-angle-left"></i>', '', $str);
+                }
             }
         }
         return $str;
     }
 
-    public function getTreeMenus($myid, $itemtpl, $selectedids = '', $disabledids = '', $wraptag = 'ul', $wrapattr = '', $deeplevel = 0)
-    {
-        $str = '';
-        //顶级
-        $childs = $this->getChild($myid);
-        if ($childs) {
-            foreach ($childs as $value) {
-                dump($value);exit();
-            }
-        }
-
-    }
     /**
      * 特殊
      * @param integer $myid 要查询的ID

@@ -21,7 +21,7 @@
                     <div class="badge badge-warning navbar-badge">{$admin.user_name}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header"><a href="#"><img src="{$admin.avatar|default='__BS__/img/avatar.png'}"alt=""></a></span>
+                    <span class="dropdown-item dropdown-header"><a href="#"><img src="{$admin.avatar|default='__BS__/img/avatar.png'}" alt=""></a></span>
                     <div class="dropdown-divider"></div>
                     <a href="{:url('index_logout')}" class="dropdown-item">
                         <i class="fa fa-close mr-2"></i>退出系统
@@ -45,7 +45,7 @@
             <!-- 侧边栏 菜单 -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    {$menu;}
+                    {$menu}
                 </ul>
             </nav>
             <!-- /.侧边栏 菜单 -->
@@ -65,7 +65,9 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
+                            {foreach $breadcrumb as $k=>$v}
                             <li class="breadcrumb-item"><a href="http://www.baidu.com" target="cao">主页</a></li>
+                            {/foreach}
                             <li class="breadcrumb-item active">仪表盘1</li>
                         </ol>
                     </div>
@@ -88,49 +90,49 @@
 {include file='common/script'/}
 </body>
 </html>
-<!--<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-header">多级菜单例子</li>
+<!--
+<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fa fa-circle"></i>
+            <p>
+                1级菜单
+                <i class="right fa fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-circle nav-icon"></i>
+                    <p>
+                        二级菜单
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-circle"></i>
-                            <p>
-                                1级菜单
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
+                            <i class="fa fa-circle nav-icon"></i>
+                            <p>三击菜单</p>
+                            <i class="right fa fa-angle-left"></i>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item has-treeview">
+                            <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="fa fa-circle nav-icon"></i>
-                                    <p>
-                                        二级菜单
-                                        <i class="right fa fa-angle-left"></i>
-                                    </p>
+                                    <p>四级菜单</p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-circle nav-icon"></i>
-                                            <p>三击菜单</p>
-                                            <i class="right fa fa-angle-left"></i>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link">
-                                                    <i class="fa fa-circle nav-icon"></i>
-                                                    <p>四级菜单</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-circle nav-icon"></i>
-                            <p>Level 1</p>
-                        </a>
-                    </li>
-                </ul>-->
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+            <i class="fa fa-circle nav-icon"></i>
+            <p>Level 1</p>
+        </a>
+    </li>
+</ul>-->

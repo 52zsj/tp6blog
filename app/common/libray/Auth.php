@@ -25,6 +25,7 @@ class Auth
      * @var $request
      */
     protected $request;
+    protected $breadcrumb = [];
 
     protected $rules = [];
     //默认配置
@@ -142,7 +143,9 @@ class Auth
             'status' => '1'
         ];
         if (!in_array('*', $ids)) {
-            $where['id'] = ['in', $ids];
+            $where = function ($query) use ($ids) {
+                $query->whereIn('id', $ids);
+            };
         }
         //读取用户组所有权限规则
         $this->rules = Db::name($this->config['auth_rule'])->where($where)->field('id,pid,condition,icon,name,title,is_menu')->select();
@@ -230,6 +233,38 @@ class Auth
             $userInfo[$uid] = $user->where($_pk, $uid)->find();
         }
         return $userInfo[$uid];
+    }
+    /**
+     * 获得面包屑导航
+     * @param string $path
+     * @return array
+     */
+    public function getBreadCrumb($path = '')
+    {
+        if ($this->breadcrumb || !$path) {
+            return $this->breadcrumb;
+        }
+        $titleArr = [];
+        $menuArr = [];
+        $urlArr = explode('/', $path);
+        foreach ($urlArr as $index => $item) {
+            $pathArr[implode('/', array_slice($urlArr, 0, $index + 1))] = $index;
+        }
+        if (!$this->rules && $this->id) {
+            $this->getRuleList();
+        }
+        foreach ($this->rules as $rule) {
+            if (isset($pathArr[$rule['name']])) {
+                $rule['title'] =$rule['title'];
+                $rule['url'] = $rule['name'];
+                $titleArr[$pathArr[$rule['name']]] = $rule['title'];
+                $menuArr[$pathArr[$rule['name']]] = $rule;
+            }
+
+        }
+        ksort($menuArr);
+        $this->breadcrumb = $menuArr;
+        return $this->breadcrumb;
     }
 
 }
